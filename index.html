@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ademicon Vila Olimpia | Dashboard de Gestao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card2: #273548;
+      --border: #334155;
+      --orange: #f97316;
+      --blue: #3b82f6;
+      --green: #22c55e;
+      --yellow: #eab308;
+      --red: #ef4444;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 14px;
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-block { display: flex; flex-direction: column; }
+    .logo-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--orange);
+      letter-spacing: -0.5px;
+    }
+    .logo-sub {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .badge-gestao {
+      background: rgba(239,68,68,0.15);
+      border: 1px solid rgba(239,68,68,0.4);
+      color: #fca5a5;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .update-info {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .update-info span { color: var(--text); font-weight: 600; }
+
+    .btn-refresh {
+      background: var(--orange);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: opacity 0.2s;
+    }
+    .btn-refresh:hover { opacity: 0.85; }
+
+    .btn-tv {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      display: inline-block;
+    }
+    .btn-tv:hover { opacity: 0.85; }
+
+    /* ========== MAIN LAYOUT ========== */
+    .main { max-width: 1400px; margin: 0 auto; padding: 24px; }
+    .section { margin-bottom: 32px; }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ========== KPI CARDS ========== */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 1200px) { .kpi-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 640px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .kpi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .kpi-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .kpi-meta {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .progress-bar-bg {
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    .fill-green { background: var(--green); }
+    .fill-yellow { background: var(--yellow); }
+    .fill-red { background: var(--red); }
+    .fill-orange { background: var(--orange); }
+    .fill-blue { background: var(--blue); }
+
+    .kpi-pct {
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* ========== THERMOMETER + FUNNEL ========== */
+    .viz-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .viz-grid { grid-template-columns: 1fr; } }
+
+    .viz-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .viz-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Thermometer */
+    .thermometer-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .thermo-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+    }
+
+    .thermo-bar-outer {
+      width: 60px;
+      height: 220px;
+      background: var(--border);
+      border-radius: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .thermo-bar-fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      border-radius: 30px;
+      background: linear-gradient(to top, var(--green), #86efac);
+      transition: height 0.8s ease;
+    }
+
+    .thermo-bar-pct {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      font-weight: 800;
+      color: white;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      white-space: nowrap;
+    }
+
+    .thermo-labels {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 220px;
+      padding: 4px 0;
+    }
+
+    .thermo-label {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .thermo-stats {
+      text-align: center;
+    }
+
+    .thermo-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--orange);
+    }
+
+    .thermo-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .thermo-goal {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 8px;
+    }
+
+    /* Funnel */
+    .funnel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .funnel-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .funnel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .funnel-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .funnel-count {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--orange);
+    }
+
+    .funnel-bar {
+      height: 10px;
+      background: var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .funnel-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.5s ease;
+    }
+
+    /* ========== CONSULTORES TABLE ========== */
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead tr {
+      background: var(--card2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 14px 16px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+    .rank-pos {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--muted);
+    }
+    .rank-1 { color: #fbbf24; }
+    .rank-2 { color: #94a3b8; }
+    .rank-3 { color: #b87333; }
+
+    .consultant-name {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .status-acima {
+      background: rgba(34,197,94,0.15);
+      color: #86efac;
+      border: 1px solid rgba(34,197,94,0.3);
+    }
+    .status-na {
+      background: rgba(234,179,8,0.15);
+      color: #fde047;
+      border: 1px solid rgba(234,179,8,0.3);
+    }
+    .status-abaixo {
+      background: rgba(239,68,68,0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239,68,68,0.3);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--muted);
+    }
+    .empty-state .empty-icon { font-size: 40px; margin-bottom: 12px; }
+    .empty-state p { font-size: 15px; font-weight: 500; }
+    .empty-state small { font-size: 12px; }
+
+    /* ========== CHARTS ========== */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .charts-grid { grid-template-columns: 1fr; } }
+
+    .chart-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .chart-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    /* ========== PLANO 90 DIAS ========== */
+    .plano-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 1100px) { .plano-grid { grid-template-columns: 1fr; } }
+
+    .mes-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .mes-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mes-number {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .mes-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .mes-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .mes-meta span {
+      font-weight: 700;
+      color: var(--orange);
+    }
+
+    .mes-progress-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .semana-list {
+      padding: 0;
+    }
+
+    .semana-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .semana-item:last-child { border-bottom: none; }
+
+    .semana-toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      transition: background 0.15s;
+    }
+    .semana-toggle:hover { background: rgba(255,255,255,0.04); }
+
+    .semana-toggle-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .semana-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      min-width: 20px;
+    }
+
+    .semana-titulo {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .semana-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-em_andamento { background: var(--orange); box-shadow: 0 0 6px var(--orange); }
+    .dot-concluido { background: var(--green); }
+    .dot-pendente { background: var(--border); }
+
+    .semana-arrow {
+      font-size: 12px;
+      color: var(--muted);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .semana-arrow.open { transform: rotate(180deg); }
+
+    .acoes-list {
+      display: none;
+      padding: 8px 20px 16px;
+      background: rgba(0,0,0,0.2);
+    }
+    .acoes-list.open { display: block; }
+
+    .acao-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .acao-item:last-child { border-bottom: none; }
+
+    .acao-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 2px solid var(--border);
+      background: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .acao-check.em_andamento {
+      border-color: var(--orange);
+      background: rgba(249,115,22,0.15);
+    }
+    .acao-check.concluido {
+      border-color: var(--green);
+      background: var(--green);
+    }
+    .acao-check.concluido::after {
+      content: '';
+      width: 5px;
+      height: 9px;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(45deg) translateY(-2px);
+    }
+
+    .acao-body { flex: 1; min-width: 0; }
+
+    .acao-texto {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .acao-texto.concluido {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+    .acao-texto.em_andamento { color: #fed7aa; }
+
+    .acao-resp {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 3px;
+      font-weight: 500;
+    }
+
+    .acao-id {
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 700;
+      min-width: 24px;
+      padding-top: 2px;
+    }
+
+    /* ========== LONGO PRAZO ========== */
+    .lp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .lp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .lp-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .lp-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .lp-values {
+      text-align: right;
+    }
+    .lp-current {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--orange);
+    }
+    .lp-goal {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .lp-bar-bg {
+      height: 20px;
+      background: var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .lp-bar-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--orange), #fb923c);
+      border-radius: 10px;
+      transition: width 0.8s ease;
+      position: relative;
+    }
+
+    .milestones {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .milestone {
+      text-align: center;
+      flex: 1;
+      min-width: 100px;
+    }
+
+    .milestone-value {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .milestone-value.reached { color: var(--green); }
+
+    .milestone-label {
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .milestone-check {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    /* ========== TOAST ========== */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 999;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-left">
+    <div class="logo-block">
+      <div class="logo-title">ADEMICON | VILA OLIMPIA</div>
+      <div class="logo-sub">Plano Operacional 90 Dias</div>
+    </div>
+    <span class="badge-gestao">VIEW GESTAO</span>
+  </div>
+  <div class="header-right">
+    <div class="update-info">Atualizado em: <span id="ultima-atualizacao">carregando...</span></div>
+    <a href="team.html" class="btn-tv">Abrir TV do Time</a>
+    <button class="btn-refresh" onclick="location.reload()">Atualizar Dados</button>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- SECAO 2: KPIs -->
+  <div class="section">
+    <div class="section-title">Indicadores da Semana</div>
+    <div class="kpi-grid" id="kpi-grid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+
+  <!-- SECAO 3: TERMOMETRO + FUNIL -->
+  <div class="section">
+    <div class="section-title">Termometro de VGV e Funil de Vendas</div>
+    <div class="viz-grid">
+
+      <div class="viz-card">
+        <div class="viz-card-title">Progresso da Meta Mensal</div>
+        <div class="thermometer-wrap">
+          <div class="thermo-container">
+            <div class="thermo-bar-outer" id="thermo-bar-outer">
+              <div class="thermo-bar-fill" id="thermo-bar-fill" style="height:0%"></div>
+              <div class="thermo-bar-pct" id="thermo-bar-pct">0%</div>
+            </div>
+            <div class="thermo-labels" id="thermo-labels">
+              <span class="thermo-label" id="thermo-label-top">R$ 0</span>
+              <span class="thermo-label" id="thermo-label-75">75%</span>
+              <span class="thermo-label" id="thermo-label-50">50%</span>
+              <span class="thermo-label" id="thermo-label-25">25%</span>
+              <span class="thermo-label" id="thermo-label-bot">R$ 0</span>
+            </div>
+          </div>
+          <div class="thermo-stats">
+            <div class="thermo-value" id="thermo-value">R$ 0</div>
+            <div class="thermo-meta">VGV do mes atual</div>
+            <div class="thermo-goal" id="thermo-goal">Meta: R$ 0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="viz-card">
+        <div class="viz-card-title">Funil de Vendas</div>
+        <div class="funnel-list" id="funil-list">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECAO 4: RANKING DE CONSULTORES -->
+  <div class="section">
+    <div class="section-title">Ranking de Consultores</div>
+    <div class="table-wrap">
+      <table id="consultores-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Consultor</th>
+            <th>VGV Semana</th>
+            <th>VGV Mes</th>
+            <th>Contratos Mes</th>
+            <th>Leads Ativos</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="consultores-tbody">
+          <!-- Rendered by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECAO 5: GRAFICOS -->
+  <div class="section">
+    <div class="section-title">Graficos de Desempenho</div>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-title">VGV Semanal Acumulado vs Meta</div>
+        <canvas id="chart-vgv" height="200"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Prospeccoes por Consultor</div>
+        <canvas id="chart-prospeccoes" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECAO 6: PLANO 90 DIAS -->
+  <div class="section">
+    <div class="section-title">Plano de Acao 30-60-90 Dias</div>
+    <div class="plano-grid" id="plano-grid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+
+  <!-- SECAO 7: LONGO PRAZO -->
+  <div class="section">
+    <div class="section-title">Objetivo de Longo Prazo</div>
+    <div class="lp-card">
+      <div class="lp-header">
+        <div>
+          <div class="lp-title">Rumo aos R$ 10 Milhoes / mes</div>
+          <div class="lp-subtitle">Projecao de crescimento por celula</div>
+        </div>
+        <div class="lp-values">
+          <div class="lp-current" id="lp-current">R$ 0</div>
+          <div class="lp-goal">Meta: R$ 10.000.000/mes</div>
+        </div>
+      </div>
+      <div class="lp-bar-bg">
+        <div class="lp-bar-fill" id="lp-bar" style="width:0%"></div>
+      </div>
+      <div class="milestones" id="milestones">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// UTILITIES
+// ============================================================
+const fmt = (v) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(v);
+const pct = (v, t) => t > 0 ? Math.min(100, Math.round((v / t) * 100)) : 0;
+const colorClass = (p) => p >= 80 ? 'fill-green' : p >= 50 ? 'fill-yellow' : 'fill-red';
+
+function showToast(msg, duration = 2500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), duration);
+}
+
+function formatDate(iso) {
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString('pt-BR') + ' as ' +
+      d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  } catch { return iso; }
+}
+
+// ============================================================
+// PERSIST PLAN STATUS (localStorage)
+// ============================================================
+function getPlanStatus() {
+  try { return JSON.parse(localStorage.getItem('ademicon_plan') || '{}'); } catch { return {}; }
+}
+
+function setPlanStatus(key, value) {
+  const s = getPlanStatus();
+  s[key] = value;
+  localStorage.setItem('ademicon_plan', JSON.stringify(s));
+}
+
+// ============================================================
+// KPI CARDS
+// ============================================================
+function renderKPIs(data) {
+  const mes = data.operacao.mes_atual || 1;
+  const metaKey = 'mes' + mes;
+  const metaSemanal = data.metas[metaKey]?.semanal || 150000;
+  const metaMensal = data.metas[metaKey]?.mensal || 600000;
+
+  const vgvSem = data.resultados.vgv_semana_atual || 0;
+  const vgvMes = data.resultados.vgv_mes_atual || 0;
+  const contratos = data.resultados.contratos_mes || 0;
+  const leads = data.resultados.leads_ativos || 0;
+  const consultores = (data.consultores || []).length;
+  const conversao = leads > 0 ? Math.round((contratos / leads) * 100) : 0;
+
+  const pVgvSem = pct(vgvSem, metaSemanal);
+  const pVgvMes = pct(vgvMes, metaMensal);
+  const pContratos = pct(contratos, 10);
+  const pLeads = pct(leads, 50);
+  const pConsultores = pct(consultores, 10);
+  const pConversao = Math.min(100, conversao);
+
+  const cards = [
+    { label: 'VGV Semana Atual', value: fmt(vgvSem), meta: 'Meta: ' + fmt(metaSemanal), p: pVgvSem },
+    { label: 'VGV Mes Atual', value: fmt(vgvMes), meta: 'Meta: ' + fmt(metaMensal), p: pVgvMes },
+    { label: 'Contratos Mes', value: contratos, meta: 'Referencia: 10', p: pContratos },
+    { label: 'Leads Ativos', value: leads, meta: 'Referencia: 50', p: pLeads },
+    { label: 'Consultores Ativos', value: consultores, meta: 'Referencia: 10', p: pConsultores },
+    { label: 'Taxa de Conversao', value: conversao + '%', meta: 'Fechados / Leads', p: pConversao },
+  ];
+
+  const grid = document.getElementById('kpi-grid');
+  grid.innerHTML = cards.map(c => `
+    <div class="kpi-card">
+      <div class="kpi-label">${c.label}</div>
+      <div class="kpi-value">${c.value}</div>
+      <div class="kpi-meta">${c.meta}</div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill ${colorClass(c.p)}" style="width:${c.p}%"></div>
+      </div>
+      <div class="kpi-pct" style="color:${c.p >= 80 ? 'var(--green)' : c.p >= 50 ? 'var(--yellow)' : 'var(--red)'}">${c.p}%</div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// THERMOMETER
+// ============================================================
+function renderThermometer(data) {
+  const mes = data.operacao.mes_atual || 1;
+  const metaKey = 'mes' + mes;
+  const metaMensal = data.metas[metaKey]?.mensal || 600000;
+  const vgvMes = data.resultados.vgv_mes_atual || 0;
+  const p = pct(vgvMes, metaMensal);
+
+  document.getElementById('thermo-bar-fill').style.height = p + '%';
+  document.getElementById('thermo-bar-pct').textContent = p + '%';
+
+  const fill = document.getElementById('thermo-bar-fill');
+  if (p >= 80) fill.style.background = 'linear-gradient(to top, var(--green), #86efac)';
+  else if (p >= 50) fill.style.background = 'linear-gradient(to top, var(--yellow), #fde047)';
+  else fill.style.background = 'linear-gradient(to top, var(--red), #fca5a5)';
+
+  document.getElementById('thermo-label-top').textContent = fmt(metaMensal);
+  document.getElementById('thermo-label-75').textContent = fmt(metaMensal * 0.75);
+  document.getElementById('thermo-label-50').textContent = fmt(metaMensal * 0.5);
+  document.getElementById('thermo-label-25').textContent = fmt(metaMensal * 0.25);
+  document.getElementById('thermo-label-bot').textContent = 'R$ 0';
+  document.getElementById('thermo-value').textContent = fmt(vgvMes);
+  document.getElementById('thermo-goal').textContent = 'Meta: ' + fmt(metaMensal);
+}
+
+// ============================================================
+// FUNIL
+// ============================================================
+function renderFunil(data) {
+  const funil = data.funil || {};
+  const etapas = [
+    { key: 'prospeccao', label: 'Prospeccao', color: 'var(--blue)' },
+    { key: 'qualificado', label: 'Qualificado', color: '#8b5cf6' },
+    { key: 'proposta', label: 'Proposta Enviada', color: 'var(--orange)' },
+    { key: 'negociacao', label: 'Negociacao', color: 'var(--yellow)' },
+    { key: 'fechado', label: 'Fechado', color: 'var(--green)' },
+  ];
+
+  const max = Math.max(...etapas.map(e => funil[e.key] || 0), 1);
+
+  const el = document.getElementById('funil-list');
+  el.innerHTML = etapas.map(e => {
+    const v = funil[e.key] || 0;
+    const w = Math.round((v / max) * 100);
+    return `
+      <div class="funnel-item">
+        <div class="funnel-header">
+          <span class="funnel-label">${e.label}</span>
+          <span class="funnel-count">${v}</span>
+        </div>
+        <div class="funnel-bar">
+          <div class="funnel-bar-fill" style="width:${w}%; background:${e.color}"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ============================================================
+// CONSULTORES TABLE
+// ============================================================
+function renderConsultores(data) {
+  const consultores = (data.consultores || [])
+    .slice()
+    .sort((a, b) => (b.vgv_mes || 0) - (a.vgv_mes || 0));
+
+  const mes = data.operacao.mes_atual || 1;
+  const metaKey = 'mes' + mes;
+  const metaSemanal = data.metas[metaKey]?.semanal || 150000;
+  const numConsultores = Math.max(consultores.length, 1);
+  const metaIndividual = metaSemanal / numConsultores;
+
+  const tbody = document.getElementById('consultores-tbody');
+
+  if (consultores.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="7">
+          <div class="empty-state">
+            <div class="empty-icon">&#128101;</div>
+            <p>Aguardando primeiros dados...</p>
+            <small>Os consultores aparecerão aqui quando a operação começar</small>
+          </div>
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbody.innerHTML = consultores.map((c, i) => {
+    const pos = i + 1;
+    const posClass = pos === 1 ? 'rank-1' : pos === 2 ? 'rank-2' : pos === 3 ? 'rank-3' : '';
+    const posSymbol = pos === 1 ? '&#127881;' : pos === 2 ? '&#129351;' : pos === 3 ? '&#129352;' : pos;
+
+    const vgvSem = c.vgv_semana || 0;
+    const vgvMes = c.vgv_mes || 0;
+    const contratos = c.contratos_mes || 0;
+    const leads = c.leads_ativos || 0;
+
+    let statusClass, statusLabel;
+    const p = metaIndividual > 0 ? (vgvSem / metaIndividual) : 0;
+    if (p >= 0.8) { statusClass = 'status-acima'; statusLabel = 'Acima da Meta'; }
+    else if (p >= 0.5) { statusClass = 'status-na'; statusLabel = 'Na Meta'; }
+    else { statusClass = 'status-abaixo'; statusLabel = 'Abaixo da Meta'; }
+
+    return `
+      <tr>
+        <td><span class="rank-pos ${posClass}">${posSymbol}</span></td>
+        <td><span class="consultant-name">${c.nome || 'Consultor'}</span></td>
+        <td>${fmt(vgvSem)}</td>
+        <td>${fmt(vgvMes)}</td>
+        <td>${contratos}</td>
+        <td>${leads}</td>
+        <td><span class="status-badge ${statusClass}">${statusLabel}</span></td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// ============================================================
+// CHARTS
+// ============================================================
+let chartVGV = null;
+let chartProsp = null;
+
+function renderCharts(data) {
+  const historico = data.resultados.historico_semanal || [];
+  const semanas = historico.length > 0 ? historico.map((_, i) => 'S' + (i + 1)) : ['S1', 'S2', 'S3', 'S4'];
+  const vgvData = historico.length > 0 ? historico.map(h => h.vgv || 0) : [0, 0, 0, 0];
+
+  const mes = data.operacao.mes_atual || 1;
+  const metaKey = 'mes' + mes;
+  const metaSemanal = data.metas[metaKey]?.semanal || 150000;
+  const metaData = semanas.map(() => metaSemanal);
+
+  const consultores = data.consultores || [];
+  const nomes = consultores.length > 0 ? consultores.map(c => c.nome || 'N/A') : ['Sem dados'];
+  const prosps = consultores.length > 0 ? consultores.map(c => c.prospecoes || 0) : [0];
+
+  const ctxVGV = document.getElementById('chart-vgv').getContext('2d');
+  if (chartVGV) chartVGV.destroy();
+  chartVGV = new Chart(ctxVGV, {
+    type: 'line',
+    data: {
+      labels: semanas,
+      datasets: [
+        {
+          label: 'VGV Realizado',
+          data: vgvData,
+          borderColor: '#f97316',
+          backgroundColor: 'rgba(249,115,22,0.1)',
+          tension: 0.4,
+          fill: true,
+          pointBackgroundColor: '#f97316',
+          pointRadius: 5,
+        },
+        {
+          label: 'Meta Semanal',
+          data: metaData,
+          borderColor: '#3b82f6',
+          borderDash: [6, 4],
+          backgroundColor: 'transparent',
+          tension: 0,
+          pointRadius: 0,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: '#94a3b8', font: { family: 'Inter', size: 12 } } },
+        tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } }
+      },
+      scales: {
+        x: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } },
+        y: { ticks: { color: '#94a3b8', callback: v => fmt(v) }, grid: { color: '#334155' } }
+      }
+    }
+  });
+
+  const ctxP = document.getElementById('chart-prospeccoes').getContext('2d');
+  if (chartProsp) chartProsp.destroy();
+  chartProsp = new Chart(ctxP, {
+    type: 'bar',
+    data: {
+      labels: nomes,
+      datasets: [{
+        label: 'Prospeccoes',
+        data: prosps,
+        backgroundColor: 'rgba(59,130,246,0.7)',
+        borderColor: '#3b82f6',
+        borderWidth: 1,
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: '#94a3b8', font: { family: 'Inter', size: 12 } } }
+      },
+      scales: {
+        x: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } },
+        y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } }
+      }
+    }
+  });
+}
+
+// ============================================================
+// PLANO 90 DIAS
+// ============================================================
+function getStatusCiclos(semanas) {
+  const overrides = getPlanStatus();
+  let concluidas = 0;
+  semanas.forEach(s => {
+    const sk = 'sem_' + s.numero;
+    const status = overrides[sk] || s.status;
+    if (status === 'concluido') concluidas++;
+  });
+  return concluidas;
+}
+
+function renderPlano(data) {
+  const plano = data.plano_90_dias || {};
+  const meses = ['mes1', 'mes2', 'mes3'];
+  const overrides = getPlanStatus();
+
+  const grid = document.getElementById('plano-grid');
+  grid.innerHTML = meses.map((mk, mi) => {
+    const mes = plano[mk];
+    if (!mes) return '';
+
+    const concluidas = getStatusCiclos(mes.semanas);
+    const progPct = Math.round((concluidas / mes.semanas.length) * 100);
+
+    const semanasHTML = mes.semanas.map(sem => {
+      const semKey = 'sem_' + sem.numero;
+      const semStatus = overrides[semKey] || sem.status;
+      const dotClass = 'dot-' + semStatus;
+
+      const acoesHTML = sem.acoes.map(acao => {
+        const aKey = 'acao_' + acao.id;
+        const aStatus = overrides[aKey] || acao.status;
+        const checkClass = aStatus === 'concluido' ? 'concluido' : aStatus === 'em_andamento' ? 'em_andamento' : '';
+        const textoClass = aStatus === 'concluido' ? 'concluido' : aStatus === 'em_andamento' ? 'em_andamento' : '';
+
+        return `
+          <div class="acao-item" data-acao-id="${acao.id}">
+            <div class="acao-check ${checkClass}" onclick="toggleAcao('${acao.id}', this)"></div>
+            <div class="acao-body">
+              <div class="acao-texto ${textoClass}">${acao.texto}</div>
+              <div class="acao-resp">Responsavel: ${acao.responsavel}</div>
+            </div>
+            <div class="acao-id">${acao.id}</div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="semana-item">
+          <button class="semana-toggle" onclick="toggleSemana(this)">
+            <div class="semana-toggle-left">
+              <span class="semana-num">S${sem.numero}</span>
+              <div class="semana-status-dot ${dotClass}"></div>
+              <span class="semana-titulo">${sem.titulo}</span>
+            </div>
+            <span class="semana-arrow">&#9660;</span>
+          </button>
+          <div class="acoes-list ${semStatus === 'em_andamento' ? 'open' : ''}">
+            ${acoesHTML}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <div class="mes-card">
+        <div class="mes-header">
+          <div class="mes-number">Mes ${mi + 1}</div>
+          <div class="mes-title">${mes.titulo}</div>
+          <div class="mes-meta">Meta VGV: <span>${fmt(mes.meta_vgv)}</span></div>
+          <div class="mes-progress-row">
+            <span>${concluidas} de ${mes.semanas.length} semanas concluidas</span>
+            <span>${progPct}%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill ${colorClass(progPct)}" style="width:${progPct}%"></div>
+          </div>
+        </div>
+        <div class="semana-list">
+          ${semanasHTML}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleSemana(btn) {
+  const arrow = btn.querySelector('.semana-arrow');
+  const list = btn.nextElementSibling;
+  const isOpen = list.classList.contains('open');
+  list.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+}
+
+function toggleAcao(id, el) {
+  const overrides = getPlanStatus();
+  const current = overrides['acao_' + id] || 'pendente';
+  const cycle = { pendente: 'em_andamento', em_andamento: 'concluido', concluido: 'pendente' };
+  const next = cycle[current];
+  setPlanStatus('acao_' + id, next);
+  el.className = 'acao-check ' + (next === 'pendente' ? '' : next);
+  const textoEl = el.parentElement.querySelector('.acao-texto');
+  textoEl.className = 'acao-texto ' + (next === 'pendente' ? '' : next);
+  showToast('Status atualizado: ' + next.replace('_', ' '));
+}
+
+// ============================================================
+// LONGO PRAZO
+// ============================================================
+function renderLongoPrazo(data) {
+  const vgvMes = data.resultados.vgv_mes_atual || 0;
+  const meta = data.metas.longo_prazo_mensal || 10000000;
+  const p = pct(vgvMes, meta);
+
+  document.getElementById('lp-current').textContent = fmt(vgvMes);
+  document.getElementById('lp-bar').style.width = Math.max(p, 0.5) + '%';
+
+  const pontos = [
+    { v: 600000, label: 'Mes 1' },
+    { v: 1500000, label: 'Mes 2' },
+    { v: 3000000, label: 'Mes 3' },
+    { v: 6000000, label: '6 Meses' },
+    { v: 10000000, label: '12 Meses' },
+  ];
+
+  document.getElementById('milestones').innerHTML = pontos.map(m => {
+    const reached = vgvMes >= m.v;
+    return `
+      <div class="milestone">
+        <div class="milestone-check">${reached ? '&#9989;' : '&#11036;'}</div>
+        <div class="milestone-value ${reached ? 'reached' : ''}">${fmt(m.v)}</div>
+        <div class="milestone-label">${m.label}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ============================================================
+// MAIN LOAD
+// ============================================================
+async function loadData() {
+  try {
+    const res = await fetch('./data.json?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+
+    document.getElementById('ultima-atualizacao').textContent = formatDate(data.ultima_atualizacao);
+
+    renderKPIs(data);
+    renderThermometer(data);
+    renderFunil(data);
+    renderConsultores(data);
+    renderCharts(data);
+    renderPlano(data);
+    renderLongoPrazo(data);
+
+  } catch (err) {
+    console.error('Erro ao carregar dados:', err);
+    document.getElementById('ultima-atualizacao').textContent = 'Erro ao carregar';
+    showToast('Erro ao carregar dados. Verifique o data.json.', 5000);
+  }
+}
+
+loadData();
+</script>
+</body>
+</html>

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ademicon Vila Olimpia | TV do Time</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050a14;
+      --card: #0d1b2e;
+      --card2: #112035;
+      --border: #1e3a5f;
+      --orange: #f97316;
+      --blue: #3b82f6;
+      --green: #22c55e;
+      --yellow: #eab308;
+      --red: #ef4444;
+      --gold: #fbbf24;
+      --text: #f1f5f9;
+      --muted: #64748b;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ========== TOP BAR ========== */
+    .top-bar {
+      background: var(--card);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .top-logo {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--orange);
+      letter-spacing: -0.5px;
+    }
+
+    .top-sub {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .top-meta-box {
+      text-align: right;
+    }
+
+    .top-meta-title {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+
+    .top-meta-value {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--yellow);
+    }
+
+    .top-meta-desc {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .top-time-box {
+      text-align: center;
+    }
+
+    .top-clock {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .top-date {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: capitalize;
+    }
+
+    /* ========== MAIN SPLIT ========== */
+    .main-split {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .left-panel {
+      padding: 28px 24px 16px 32px;
+      display: flex;
+      flex-direction: column;
+      border-right: 2px solid var(--border);
+      overflow: hidden;
+    }
+
+    .right-panel {
+      padding: 28px 32px 16px 24px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ========== LEFT PANEL: THERMOMETER ========== */
+    .panel-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .vgv-semana-value {
+      font-size: 56px;
+      font-weight: 900;
+      color: var(--green);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .vgv-semana-meta {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 6px;
+      margin-bottom: 20px;
+    }
+
+    .thermo-outer {
+      flex: 1;
+      min-height: 0;
+      max-height: 260px;
+      background: var(--card2);
+      border: 2px solid var(--border);
+      border-radius: 40px;
+      position: relative;
+      overflow: hidden;
+      width: 80px;
+      margin: 0 auto 20px;
+    }
+
+    .thermo-fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      border-radius: 40px;
+      transition: height 1s ease;
+    }
+
+    .thermo-pct-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      white-space: nowrap;
+    }
+
+    .thermo-row {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .thermo-stats-block {
+      text-align: center;
+    }
+
+    .mes-vgv-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .mes-vgv-values {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--orange);
+    }
+
+    .mes-vgv-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .mes-bar-bg {
+      height: 10px;
+      background: var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+
+    .mes-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 1s ease;
+    }
+
+    /* ========== RIGHT PANEL: RANKING ========== */
+    .ranking-list {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .ranking-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+
+    .ranking-item.rank-1 {
+      background: linear-gradient(135deg, #1a2a00 0%, #0d1b2e 100%);
+      border-color: var(--gold);
+      border-width: 2px;
+      box-shadow: 0 0 20px rgba(251,191,36,0.15);
+    }
+
+    .rank-medal {
+      font-size: 24px;
+      min-width: 36px;
+      text-align: center;
+    }
+
+    .rank-info { flex: 1; min-width: 0; }
+
+    .rank-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rank-item-1 .rank-name {
+      font-size: 24px;
+      color: var(--gold);
+    }
+
+    .rank-vgv {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--green);
+      white-space: nowrap;
+    }
+
+    .rank-item-1 .rank-vgv {
+      font-size: 28px;
+      color: #86efac;
+    }
+
+    .rank-badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-ouro {
+      background: rgba(251,191,36,0.2);
+      border: 1px solid rgba(251,191,36,0.5);
+      color: var(--gold);
+    }
+
+    .badge-prata {
+      background: rgba(148,163,184,0.2);
+      border: 1px solid rgba(148,163,184,0.4);
+      color: #cbd5e1;
+    }
+
+    .badge-bronze {
+      background: rgba(184,115,51,0.2);
+      border: 1px solid rgba(184,115,51,0.4);
+      color: #cd7f32;
+    }
+
+    .badge-normal {
+      background: rgba(59,130,246,0.15);
+      border: 1px solid rgba(59,130,246,0.3);
+      color: #93c5fd;
+    }
+
+    .empty-tv {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--muted);
+      gap: 12px;
+    }
+
+    .empty-tv .icon { font-size: 48px; }
+    .empty-tv .msg { font-size: 22px; font-weight: 700; color: var(--text); }
+    .empty-tv .sub { font-size: 14px; }
+
+    /* ========== BOTTOM TICKER ========== */
+    .bottom-bar {
+      background: var(--card);
+      border-top: 2px solid var(--border);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .ticker-label {
+      background: var(--orange);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0 16px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .ticker-track {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ticker-content {
+      display: inline-block;
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      animation: ticker-scroll 30s linear infinite;
+      padding-left: 100%;
+    }
+
+    @keyframes ticker-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .motivacional-banner {
+      padding: 0 24px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--blue);
+      text-align: right;
+      min-width: 320px;
+      flex-shrink: 0;
+      border-left: 1px solid var(--border);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    #motivacional-text {
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div>
+    <div class="top-logo">ADEMICON | VILA OLIMPIA</div>
+    <div class="top-sub">Dashboard Operacional</div>
+  </div>
+  <div class="top-time-box">
+    <div class="top-clock" id="clock">00:00:00</div>
+    <div class="top-date" id="top-date"></div>
+  </div>
+  <div class="top-meta-box">
+    <div class="top-meta-title">Faltam para a meta</div>
+    <div class="top-meta-value" id="falta-meta">R$ 0</div>
+    <div class="top-meta-desc" id="dias-restantes">calculando...</div>
+  </div>
+</div>
+
+<!-- MAIN SPLIT -->
+<div class="main-split">
+
+  <!-- LEFT: VGV TERMOMETRO -->
+  <div class="left-panel">
+    <div class="panel-title">VGV da Semana</div>
+    <div class="vgv-semana-value" id="tv-vgv-semana">R$ 0</div>
+    <div class="vgv-semana-meta" id="tv-meta-semana">META: R$ 150.000</div>
+
+    <div class="thermo-row" style="flex:1; min-height:0; align-items:center;">
+      <div class="thermo-outer" id="tv-thermo-outer">
+        <div class="thermo-fill" id="tv-thermo-fill" style="height:0%"></div>
+        <div class="thermo-pct-label" id="tv-thermo-pct">0%</div>
+      </div>
+      <div class="thermo-stats-block">
+        <div class="mes-vgv-label">VGV do Mes</div>
+        <div class="mes-vgv-values" id="tv-vgv-mes">R$ 0</div>
+        <div class="mes-vgv-meta" id="tv-meta-mes">Meta: R$ 600.000</div>
+        <div class="mes-bar-bg">
+          <div class="mes-bar-fill" id="tv-mes-bar" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: RANKING -->
+  <div class="right-panel">
+    <div class="panel-title">Ranking do Time</div>
+    <div class="ranking-list" id="ranking-list">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM TICKER -->
+<div class="bottom-bar">
+  <div class="ticker-label">AO VIVO</div>
+  <div class="ticker-track">
+    <span class="ticker-content" id="ticker-content">Bem-vindos ao painel Ademicon Vila Olimpia! Vamos juntos bater as metas!</span>
+  </div>
+  <div class="motivacional-banner">
+    <span id="motivacional-text">Carregando...</span>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// UTILS
+// ============================================================
+const fmt = (v) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(v);
+const pct = (v, t) => t > 0 ? Math.min(100, Math.round((v / t) * 100)) : 0;
+
+// ============================================================
+// CLOCK
+// ============================================================
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent =
+    now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  document.getElementById('top-date').textContent =
+    now.toLocaleDateString('pt-BR', { weekday: 'long', day: '2-digit', month: 'long' });
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ============================================================
+// FRASES MOTIVACIONAIS
+// ============================================================
+const frases = [
+  "Cada nao te aproxima do proximo sim. Continue prospectando!",
+  "Campeoes nao sao feitos na condicao de conforto.",
+  "Sua disciplina hoje e o seu resultado amanha.",
+  "Um contrato fechado muda a vida de uma familia.",
+  "Foco, persistencia e resultado. Esse e o nosso padrao.",
+  "O sucesso nao e um acidente. E trabalho, perseveranca e aprendizado.",
+  "Ligue mais uma vez. Aquela ligacao pode ser o contrato do mes.",
+  "Times vencedores nao esperam motivacao. Eles criam habitos.",
+  "Cada abordagem e uma semente plantada. Agua com disciplina.",
+  "Quem prospecta muito, fecha muito. Simples assim.",
+];
+
+let fraseIdx = 0;
+function rotacionarFrase() {
+  const el = document.getElementById('motivacional-text');
+  el.style.opacity = '0';
+  setTimeout(() => {
+    fraseIdx = (fraseIdx + 1) % frases.length;
+    el.textContent = frases[fraseIdx];
+    el.style.opacity = '1';
+  }, 500);
+}
+setInterval(rotacionarFrase, 30000);
+
+// ============================================================
+// RENDER
+// ============================================================
+function renderTV(data) {
+  const mes = data.operacao.mes_atual || 1;
+  const metaKey = 'mes' + mes;
+  const metaSemanal = data.metas[metaKey]?.semanal || 150000;
+  const metaMensal = data.metas[metaKey]?.mensal || 600000;
+  const vgvSem = data.resultados.vgv_semana_atual || 0;
+  const vgvMes = data.resultados.vgv_mes_atual || 0;
+
+  const pSem = pct(vgvSem, metaSemanal);
+  const pMes = pct(vgvMes, metaMensal);
+
+  // Valores semana
+  document.getElementById('tv-vgv-semana').textContent = fmt(vgvSem);
+  document.getElementById('tv-meta-semana').textContent = 'META: ' + fmt(metaSemanal);
+
+  // Termometro
+  const fill = document.getElementById('tv-thermo-fill');
+  fill.style.height = pSem + '%';
+  if (pSem >= 80) fill.style.background = 'linear-gradient(to top, #22c55e, #86efac)';
+  else if (pSem >= 50) fill.style.background = 'linear-gradient(to top, #eab308, #fde047)';
+  else fill.style.background = 'linear-gradient(to top, #ef4444, #fca5a5)';
+
+  document.getElementById('tv-thermo-pct').textContent = pSem + '%';
+
+  // Mes
+  document.getElementById('tv-vgv-mes').textContent = fmt(vgvMes);
+  document.getElementById('tv-meta-mes').textContent = 'Meta: ' + fmt(metaMensal);
+
+  const mesBar = document.getElementById('tv-mes-bar');
+  mesBar.style.width = Math.max(pMes, 0.5) + '%';
+  if (pMes >= 80) mesBar.style.background = '#22c55e';
+  else if (pMes >= 50) mesBar.style.background = '#eab308';
+  else mesBar.style.background = '#ef4444';
+
+  // Falta para meta
+  const falta = Math.max(0, metaSemanal - vgvSem);
+  document.getElementById('falta-meta').textContent = fmt(falta);
+
+  // Dias restantes no mes
+  const hoje = new Date();
+  const ultimoDia = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0);
+  const diasRestantes = ultimoDia.getDate() - hoje.getDate();
+  document.getElementById('dias-restantes').textContent = diasRestantes + ' dias restantes no mes';
+
+  // Ranking
+  const consultores = (data.consultores || [])
+    .slice()
+    .sort((a, b) => (b.vgv_semana || 0) - (a.vgv_semana || 0));
+
+  const rankingEl = document.getElementById('ranking-list');
+
+  if (consultores.length === 0) {
+    rankingEl.innerHTML = `
+      <div class="empty-tv">
+        <div class="icon">&#128101;</div>
+        <div class="msg">Aguardando primeiros dados...</div>
+        <div class="sub">O ranking aparecera aqui quando a operacao comecar</div>
+      </div>
+    `;
+  } else {
+    const medals = ['&#127881;', '&#129351;', '&#129352;'];
+    const badgeClasses = ['badge-ouro', 'badge-prata', 'badge-bronze'];
+    const badgeLabels = ['Lider', 'Vice', 'Terceiro'];
+
+    rankingEl.innerHTML = consultores.slice(0, 6).map((c, i) => {
+      const pos = i + 1;
+      const medal = medals[i] || '#' + pos;
+      const badgeClass = i < 3 ? badgeClasses[i] : 'badge-normal';
+      const badgeLabel = i < 3 ? badgeLabels[i] : 'Consultor';
+      const itemClass = i === 0 ? 'ranking-item rank-1' : 'ranking-item';
+
+      return `
+        <div class="${itemClass}">
+          <div class="rank-medal">${medal}</div>
+          <div class="rank-info">
+            <div class="rank-name">${c.nome || 'Consultor ' + pos}</div>
+          </div>
+          <div class="rank-vgv">${fmt(c.vgv_semana || 0)}</div>
+          <span class="rank-badge ${badgeClass}">${badgeLabel}</span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Ticker ultima venda
+  const vendas = data.vendas_recentes || [];
+  let tickerText = 'Bem-vindos ao painel Ademicon Vila Olimpia! Vamos juntos bater as metas! | ';
+  if (vendas.length > 0) {
+    tickerText = vendas.map(v =>
+      `ULTIMA VENDA: ${v.consultor || 'Consultor'} fechou ${v.produto || 'contrato'} de ${fmt(v.valor || 0)} as ${v.hora || '--:--'}`
+    ).join('   |   ') + '   |   ';
+  }
+  document.getElementById('ticker-content').textContent = tickerText;
+
+  // Frases inicial
+  document.getElementById('motivacional-text').textContent = frases[fraseIdx];
+}
+
+// ============================================================
+// LOAD + AUTO-REFRESH (5min)
+// ============================================================
+async function loadData() {
+  try {
+    const res = await fetch('./data.json?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    renderTV(data);
+  } catch (err) {
+    console.error('Erro ao carregar dados:', err);
+    document.getElementById('tv-vgv-semana').textContent = 'Erro';
+  }
+}
+
+loadData();
+setInterval(loadData, 5 * 60 * 1000); // 5 minutos
+</script>
+</body>
+</html>
