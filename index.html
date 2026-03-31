@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ademicon Vila Olimpia | Dashboard de Gestao</title>
+  <title>Ademicon Vila Olímpia | Dashboard de Gestão</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -70,7 +70,7 @@
       text-transform: uppercase;
     }
 
-    .badge-gestao {
+    .badge-gestão {
       background: rgba(239,68,68,0.15);
       border: 1px solid rgba(239,68,68,0.4);
       color: #fca5a5;
@@ -572,7 +572,7 @@
       flex-shrink: 0;
     }
     .dot-em_andamento { background: var(--orange); box-shadow: 0 0 6px var(--orange); }
-    .dot-concluido { background: var(--green); }
+    .dot-concluído { background: var(--green); }
     .dot-pendente { background: var(--border); }
 
     .semana-arrow {
@@ -583,23 +583,23 @@
     }
     .semana-arrow.open { transform: rotate(180deg); }
 
-    .acoes-list {
+    .ações-list {
       display: none;
       padding: 8px 20px 16px;
       background: rgba(0,0,0,0.2);
     }
-    .acoes-list.open { display: block; }
+    .ações-list.open { display: block; }
 
-    .acao-item {
+    .ação-item {
       display: flex;
       align-items: flex-start;
       gap: 10px;
       padding: 8px 0;
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .acao-item:last-child { border-bottom: none; }
+    .ação-item:last-child { border-bottom: none; }
 
-    .acao-check {
+    .ação-check {
       width: 18px;
       height: 18px;
       border-radius: 4px;
@@ -613,15 +613,15 @@
       justify-content: center;
       transition: all 0.2s;
     }
-    .acao-check.em_andamento {
+    .ação-check.em_andamento {
       border-color: var(--orange);
       background: rgba(249,115,22,0.15);
     }
-    .acao-check.concluido {
+    .ação-check.concluído {
       border-color: var(--green);
       background: var(--green);
     }
-    .acao-check.concluido::after {
+    .ação-check.concluído::after {
       content: '';
       width: 5px;
       height: 9px;
@@ -630,27 +630,27 @@
       transform: rotate(45deg) translateY(-2px);
     }
 
-    .acao-body { flex: 1; min-width: 0; }
+    .ação-body { flex: 1; min-width: 0; }
 
-    .acao-texto {
+    .ação-texto {
       font-size: 12px;
       line-height: 1.5;
       color: var(--text);
     }
-    .acao-texto.concluido {
+    .ação-texto.concluído {
       text-decoration: line-through;
       color: var(--muted);
     }
-    .acao-texto.em_andamento { color: #fed7aa; }
+    .ação-texto.em_andamento { color: #fed7aa; }
 
-    .acao-resp {
+    .ação-resp {
       font-size: 10px;
       color: var(--muted);
       margin-top: 3px;
       font-weight: 500;
     }
 
-    .acao-id {
+    .ação-id {
       font-size: 10px;
       color: var(--muted);
       font-weight: 700;
@@ -778,10 +778,10 @@
       <div class="logo-title">ADEMICON | VILA OLIMPIA</div>
       <div class="logo-sub">Plano Operacional 90 Dias</div>
     </div>
-    <span class="badge-gestao">VIEW GESTAO</span>
+    <span class="badge-gestão">VIEW GESTAO</span>
   </div>
   <div class="header-right">
-    <div class="update-info">Atualizado em: <span id="ultima-atualizacao">carregando...</span></div>
+    <div class="update-info">Atualizado em: <span id="ultima-atualização">carregando...</span></div>
     <a href="team.html" class="btn-tv">Abrir TV do Time</a>
     <button class="btn-refresh" onclick="location.reload()">Atualizar Dados</button>
   </div>
@@ -799,7 +799,7 @@
 
   <!-- SECAO 3: TERMOMETRO + FUNIL -->
   <div class="section">
-    <div class="section-title">Termometro de VGV e Funil de Vendas</div>
+    <div class="section-title">Termômetro de VGV e Funil de Vendas</div>
     <div class="viz-grid">
 
       <div class="viz-card">
@@ -820,7 +820,7 @@
           </div>
           <div class="thermo-stats">
             <div class="thermo-value" id="thermo-value">R$ 0</div>
-            <div class="thermo-meta">VGV do mes atual</div>
+            <div class="thermo-meta">VGV do mês atual</div>
             <div class="thermo-goal" id="thermo-goal">Meta: R$ 0</div>
           </div>
         </div>
@@ -861,14 +861,14 @@
 
   <!-- SECAO 5: GRAFICOS -->
   <div class="section">
-    <div class="section-title">Graficos de Desempenho</div>
+    <div class="section-title">Gráficos de Desempenho</div>
     <div class="charts-grid">
       <div class="chart-card">
         <div class="chart-title">VGV Semanal Acumulado vs Meta</div>
         <canvas id="chart-vgv" height="200"></canvas>
       </div>
       <div class="chart-card">
-        <div class="chart-title">Prospeccoes por Consultor</div>
+        <div class="chart-title">Prospecções por Consultor</div>
         <canvas id="chart-prospeccoes" height="200"></canvas>
       </div>
     </div>
@@ -876,7 +876,7 @@
 
   <!-- SECAO 6: PLANO 90 DIAS -->
   <div class="section">
-    <div class="section-title">Plano de Acao 30-60-90 Dias</div>
+    <div class="section-title">Plano de Ação 30-60-90 Dias</div>
     <div class="plano-grid" id="plano-grid">
       <!-- Rendered by JS -->
     </div>
@@ -888,8 +888,8 @@
     <div class="lp-card">
       <div class="lp-header">
         <div>
-          <div class="lp-title">Rumo aos R$ 10 Milhoes / mes</div>
-          <div class="lp-subtitle">Projecao de crescimento por celula</div>
+          <div class="lp-title">Rumo aos R$ 10 Milhões / mes</div>
+          <div class="lp-subtitle">Projeção de crescimento por célula</div>
         </div>
         <div class="lp-values">
           <div class="lp-current" id="lp-current">R$ 0</div>
@@ -949,7 +949,7 @@ function setPlanStatus(key, value) {
 // KPI CARDS
 // ============================================================
 function renderKPIs(data) {
-  const mes = data.operacao.mes_atual || 1;
+  const mes = data.operação.mes_atual || 1;
   const metaKey = 'mes' + mes;
   const metaSemanal = data.metas[metaKey]?.semanal || 150000;
   const metaMensal = data.metas[metaKey]?.mensal || 600000;
@@ -959,14 +959,14 @@ function renderKPIs(data) {
   const contratos = data.resultados.contratos_mes || 0;
   const leads = data.resultados.leads_ativos || 0;
   const consultores = (data.consultores || []).length;
-  const conversao = leads > 0 ? Math.round((contratos / leads) * 100) : 0;
+  const conversão = leads > 0 ? Math.round((contratos / leads) * 100) : 0;
 
   const pVgvSem = pct(vgvSem, metaSemanal);
   const pVgvMes = pct(vgvMes, metaMensal);
   const pContratos = pct(contratos, 10);
   const pLeads = pct(leads, 50);
   const pConsultores = pct(consultores, 10);
-  const pConversao = Math.min(100, conversao);
+  const pConversão = Math.min(100, conversão);
 
   const cards = [
     { label: 'VGV Semana Atual', value: fmt(vgvSem), meta: 'Meta: ' + fmt(metaSemanal), p: pVgvSem },
@@ -974,7 +974,7 @@ function renderKPIs(data) {
     { label: 'Contratos Mes', value: contratos, meta: 'Referencia: 10', p: pContratos },
     { label: 'Leads Ativos', value: leads, meta: 'Referencia: 50', p: pLeads },
     { label: 'Consultores Ativos', value: consultores, meta: 'Referencia: 10', p: pConsultores },
-    { label: 'Taxa de Conversao', value: conversao + '%', meta: 'Fechados / Leads', p: pConversao },
+    { label: 'Taxa de Conversão', value: conversão + '%', meta: 'Fechados / Leads', p: pConversão },
   ];
 
   const grid = document.getElementById('kpi-grid');
@@ -995,7 +995,7 @@ function renderKPIs(data) {
 // THERMOMETER
 // ============================================================
 function renderThermometer(data) {
-  const mes = data.operacao.mes_atual || 1;
+  const mes = data.operação.mes_atual || 1;
   const metaKey = 'mes' + mes;
   const metaMensal = data.metas[metaKey]?.mensal || 600000;
   const vgvMes = data.resultados.vgv_mes_atual || 0;
@@ -1024,10 +1024,10 @@ function renderThermometer(data) {
 function renderFunil(data) {
   const funil = data.funil || {};
   const etapas = [
-    { key: 'prospeccao', label: 'Prospeccao', color: 'var(--blue)' },
+    { key: 'prospeccao', label: 'Prospecção', color: 'var(--blue)' },
     { key: 'qualificado', label: 'Qualificado', color: '#8b5cf6' },
     { key: 'proposta', label: 'Proposta Enviada', color: 'var(--orange)' },
-    { key: 'negociacao', label: 'Negociacao', color: 'var(--yellow)' },
+    { key: 'negociação', label: 'Negociação', color: 'var(--yellow)' },
     { key: 'fechado', label: 'Fechado', color: 'var(--green)' },
   ];
 
@@ -1059,7 +1059,7 @@ function renderConsultores(data) {
     .slice()
     .sort((a, b) => (b.vgv_mes || 0) - (a.vgv_mes || 0));
 
-  const mes = data.operacao.mes_atual || 1;
+  const mes = data.operação.mes_atual || 1;
   const metaKey = 'mes' + mes;
   const metaSemanal = data.metas[metaKey]?.semanal || 150000;
   const numConsultores = Math.max(consultores.length, 1);
@@ -1119,11 +1119,11 @@ let chartVGV = null;
 let chartProsp = null;
 
 function renderCharts(data) {
-  const historico = data.resultados.historico_semanal || [];
-  const semanas = historico.length > 0 ? historico.map((_, i) => 'S' + (i + 1)) : ['S1', 'S2', 'S3', 'S4'];
-  const vgvData = historico.length > 0 ? historico.map(h => h.vgv || 0) : [0, 0, 0, 0];
+  const histórico = data.resultados.histórico_semanal || [];
+  const semanas = histórico.length > 0 ? histórico.map((_, i) => 'S' + (i + 1)) : ['S1', 'S2', 'S3', 'S4'];
+  const vgvData = histórico.length > 0 ? histórico.map(h => h.vgv || 0) : [0, 0, 0, 0];
 
-  const mes = data.operacao.mes_atual || 1;
+  const mes = data.operação.mes_atual || 1;
   const metaKey = 'mes' + mes;
   const metaSemanal = data.metas[metaKey]?.semanal || 150000;
   const metaData = semanas.map(() => metaSemanal);
@@ -1180,7 +1180,7 @@ function renderCharts(data) {
     data: {
       labels: nomes,
       datasets: [{
-        label: 'Prospeccoes',
+        label: 'Prospecções',
         data: prosps,
         backgroundColor: 'rgba(59,130,246,0.7)',
         borderColor: '#3b82f6',
@@ -1210,7 +1210,7 @@ function getStatusCiclos(semanas) {
   semanas.forEach(s => {
     const sk = 'sem_' + s.numero;
     const status = overrides[sk] || s.status;
-    if (status === 'concluido') concluidas++;
+    if (status === 'concluído') concluidas++;
   });
   return concluidas;
 }
@@ -1233,20 +1233,20 @@ function renderPlano(data) {
       const semStatus = overrides[semKey] || sem.status;
       const dotClass = 'dot-' + semStatus;
 
-      const acoesHTML = sem.acoes.map(acao => {
-        const aKey = 'acao_' + acao.id;
-        const aStatus = overrides[aKey] || acao.status;
-        const checkClass = aStatus === 'concluido' ? 'concluido' : aStatus === 'em_andamento' ? 'em_andamento' : '';
-        const textoClass = aStatus === 'concluido' ? 'concluido' : aStatus === 'em_andamento' ? 'em_andamento' : '';
+      const açõesHTML = sem.ações.map(ação => {
+        const aKey = 'ação_' + ação.id;
+        const aStatus = overrides[aKey] || ação.status;
+        const checkClass = aStatus === 'concluído' ? 'concluído' : aStatus === 'em_andamento' ? 'em_andamento' : '';
+        const textoClass = aStatus === 'concluído' ? 'concluído' : aStatus === 'em_andamento' ? 'em_andamento' : '';
 
         return `
-          <div class="acao-item" data-acao-id="${acao.id}">
-            <div class="acao-check ${checkClass}" onclick="toggleAcao('${acao.id}', this)"></div>
-            <div class="acao-body">
-              <div class="acao-texto ${textoClass}">${acao.texto}</div>
-              <div class="acao-resp">Responsavel: ${acao.responsavel}</div>
+          <div class="ação-item" data-ação-id="${ação.id}">
+            <div class="ação-check ${checkClass}" onclick="toggleAção('${ação.id}', this)"></div>
+            <div class="ação-body">
+              <div class="ação-texto ${textoClass}">${ação.texto}</div>
+              <div class="ação-resp">Responsável: ${ação.responsavel}</div>
             </div>
-            <div class="acao-id">${acao.id}</div>
+            <div class="ação-id">${ação.id}</div>
           </div>
         `;
       }).join('');
@@ -1261,8 +1261,8 @@ function renderPlano(data) {
             </div>
             <span class="semana-arrow">&#9660;</span>
           </button>
-          <div class="acoes-list ${semStatus === 'em_andamento' ? 'open' : ''}">
-            ${acoesHTML}
+          <div class="ações-list ${semStatus === 'em_andamento' ? 'open' : ''}">
+            ${açõesHTML}
           </div>
         </div>
       `;
@@ -1298,15 +1298,15 @@ function toggleSemana(btn) {
   arrow.classList.toggle('open', !isOpen);
 }
 
-function toggleAcao(id, el) {
+function toggleAção(id, el) {
   const overrides = getPlanStatus();
-  const current = overrides['acao_' + id] || 'pendente';
-  const cycle = { pendente: 'em_andamento', em_andamento: 'concluido', concluido: 'pendente' };
+  const current = overrides['ação_' + id] || 'pendente';
+  const cycle = { pendente: 'em_andamento', em_andamento: 'concluído', concluído: 'pendente' };
   const next = cycle[current];
-  setPlanStatus('acao_' + id, next);
-  el.className = 'acao-check ' + (next === 'pendente' ? '' : next);
-  const textoEl = el.parentElement.querySelector('.acao-texto');
-  textoEl.className = 'acao-texto ' + (next === 'pendente' ? '' : next);
+  setPlanStatus('ação_' + id, next);
+  el.className = 'ação-check ' + (next === 'pendente' ? '' : next);
+  const textoEl = el.parentElement.querySelector('.ação-texto');
+  textoEl.className = 'ação-texto ' + (next === 'pendente' ? '' : next);
   showToast('Status atualizado: ' + next.replace('_', ' '));
 }
 
@@ -1350,7 +1350,7 @@ async function loadData() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
 
-    document.getElementById('ultima-atualizacao').textContent = formatDate(data.ultima_atualizacao);
+    document.getElementById('ultima-atualização').textContent = formatDate(data.ultima_atualização);
 
     renderKPIs(data);
     renderThermometer(data);
@@ -1362,7 +1362,7 @@ async function loadData() {
 
   } catch (err) {
     console.error('Erro ao carregar dados:', err);
-    document.getElementById('ultima-atualizacao').textContent = 'Erro ao carregar';
+    document.getElementById('ultima-atualização').textContent = 'Erro ao carregar';
     showToast('Erro ao carregar dados. Verifique o data.json.', 5000);
   }
 }
