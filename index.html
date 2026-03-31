@@ -1027,7 +1027,7 @@ function renderFunil(data) {
     { key: 'prospeccao', label: 'Prospecção', color: 'var(--blue)' },
     { key: 'qualificado', label: 'Qualificado', color: '#8b5cf6' },
     { key: 'proposta', label: 'Proposta Enviada', color: 'var(--orange)' },
-    { key: 'negociação', label: 'Negociação', color: 'var(--yellow)' },
+    { key: 'negociacao', label: 'Negociação', color: 'var(--yellow)' },
     { key: 'fechado', label: 'Fechado', color: 'var(--green)' },
   ];
 
@@ -1257,7 +1257,7 @@ function renderPlano(data) {
             <div class="semana-toggle-left">
               <span class="semana-num">S${sem.numero}</span>
               <div class="semana-status-dot ${dotClass}"></div>
-              <span class="semana-titulo">${sem.titulo}</span>
+              <span class="semana-titulo">${sem["título"]}</span>
             </div>
             <span class="semana-arrow">&#9660;</span>
           </button>
@@ -1272,7 +1272,7 @@ function renderPlano(data) {
       <div class="mes-card">
         <div class="mes-header">
           <div class="mes-number">Mes ${mi + 1}</div>
-          <div class="mes-title">${mes.titulo}</div>
+          <div class="mes-title">${mes["título"]}</div>
           <div class="mes-meta">Meta VGV: <span>${fmt(mes.meta_vgv)}</span></div>
           <div class="mes-progress-row">
             <span>${concluidas} de ${mes.semanas.length} semanas concluidas</span>
@@ -1350,7 +1350,7 @@ async function loadData() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
 
-    document.getElementById('ultima-atualização').textContent = formatDate(data.ultima_atualização);
+    document.getElementById('ultima-atualização').textContent = formatDate(data.ultima_atualizacao);
 
     renderKPIs(data);
     renderThermometer(data);
