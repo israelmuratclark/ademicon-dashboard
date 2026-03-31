@@ -533,15 +533,15 @@ setInterval(rotacionarFrase, 30000);
 // RENDER
 // ============================================================
 function renderTV(data) {
-  const mes = data.operacao.mes_atual || 1;
+  const mes = data["operação"].mes_atual || 1;
   const metaKey = 'mes' + mes;
   const metaSemanal = data.metas[metaKey]?.semanal || 150000;
   const metaMensal = data.metas[metaKey]?.mensal || 600000;
   const vgvSem = data.resultados.vgv_semana_atual || 0;
-  const vgvMês = data.resultados.vgv_mes_atual || 0;
+  const vgvMes = data.resultados.vgv_mes_atual || 0;
 
   const pSem = pct(vgvSem, metaSemanal);
-  const pMês = pct(vgvMes, metaMensal);
+  const pMes = pct(vgvMes, metaMensal);
 
   // Valores semana
   document.getElementById('tv-vgv-semana').textContent = fmt(vgvSem);
@@ -562,8 +562,8 @@ function renderTV(data) {
 
   const mesBar = document.getElementById('tv-mes-bar');
   mesBar.style.width = Math.max(pMes, 0.5) + '%';
-  if (pMês >= 80) mesBar.style.background = '#22c55e';
-  else if (pMês >= 50) mesBar.style.background = '#eab308';
+  if (pMes >= 80) mesBar.style.background = '#22c55e';
+  else if (pMes >= 50) mesBar.style.background = '#eab308';
   else mesBar.style.background = '#ef4444';
 
   // Falta para meta
