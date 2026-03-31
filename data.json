@@ -1,39 +1,24 @@
 {
-  "ultima_atualizacao": "2026-03-31T21:09:32",
+  "ultima_atualizacao": "2026-03-30T10:00:00",
   "operação": {
     "início": "2026-04-07",
     "mes_atual": 1,
     "semana_atual": 1
   },
   "metas": {
-    "mes1": {
-      "semanal": 150000,
-      "mensal": 600000
-    },
-    "mes2": {
-      "semanal": 375000,
-      "mensal": 1500000
-    },
-    "mes3": {
-      "semanal": 750000,
-      "mensal": 3000000
-    },
+    "mes1": { "semanal": 150000, "mensal": 600000 },
+    "mes2": { "semanal": 375000, "mensal": 1500000 },
+    "mes3": { "semanal": 750000, "mensal": 3000000 },
     "longo_prazo_mensal": 10000000
   },
   "resultados": {
-    "vgv_semana_atual": 0.0,
-    "vgv_mes_atual": 0.0,
+    "vgv_semana_atual": 0,
+    "vgv_mes_atual": 0,
     "contratos_semana": 0,
     "contratos_mes": 0,
     "leads_ativos": 0,
     "prospecoes_hoje": 0,
-    "historico_semanal": [
-      {
-        "semana": 14,
-        "vgv": 0.0,
-        "label": "S1"
-      }
-    ]
+    "historico_semanal": []
   },
   "consultores": [],
   "vendas_recentes": [],
@@ -54,54 +39,14 @@
           "título": "Lançamento da Operação",
           "status": "em_andamento",
           "ações": [
-            {
-              "id": "1.1",
-              "texto": "Configurar escritorio e infraestrutura operacional",
-              "responsavel": "Raphael + Wagner",
-              "status": "pendente"
-            },
-            {
-              "id": "1.2",
-              "texto": "Configurar Apollo CRM com funil e campos personalizados",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "1.3",
-              "texto": "Ativar Agente IA MXMR no WhatsApp oficial",
-              "responsavel": "Israel",
-              "status": "pendente"
-            },
-            {
-              "id": "1.4",
-              "texto": "Publicar vagas no LinkedIn e acionar indicações da rede",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "1.5",
-              "texto": "Contratar primeiros 3 a 4 consultores",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "1.6",
-              "texto": "Primeira semana de onboarding presencial obrigatório",
-              "responsavel": "Wagner",
-              "status": "pendente"
-            },
-            {
-              "id": "1.7",
-              "texto": "Realizar Módulos 1 e 2 de treinamento (segunda-feira manha)",
-              "responsavel": "Wagner",
-              "status": "pendente"
-            },
-            {
-              "id": "1.8",
-              "texto": "Primeira reunião estratégica semanal (Israel, Raphael, Alexandre, Wagner)",
-              "responsavel": "Israel",
-              "status": "pendente"
-            }
+            {"id": "1.1", "texto": "Configurar escritorio e infraestrutura operacional", "responsavel": "Raphael + Wagner", "status": "pendente"},
+            {"id": "1.2", "texto": "Configurar Apollo CRM com funil e campos personalizados", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "1.3", "texto": "Ativar Agente IA MXMR no WhatsApp oficial", "responsavel": "Israel", "status": "pendente"},
+            {"id": "1.4", "texto": "Publicar vagas no LinkedIn e acionar indicações da rede", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "1.5", "texto": "Contratar primeiros 3 a 4 consultores", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "1.6", "texto": "Primeira semana de onboarding presencial obrigatório", "responsavel": "Wagner", "status": "pendente"},
+            {"id": "1.7", "texto": "Realizar Módulos 1 e 2 de treinamento (segunda-feira manha)", "responsavel": "Wagner", "status": "pendente"},
+            {"id": "1.8", "texto": "Primeira reunião estratégica semanal (Israel, Raphael, Alexandre, Wagner)", "responsavel": "Israel", "status": "pendente"}
           ]
         },
         {
@@ -109,48 +54,13 @@
           "título": "Primeiras Prospeccoes e Fechamentos",
           "status": "pendente",
           "ações": [
-            {
-              "id": "2.1",
-              "texto": "Consultores iniciam prospecção ativa (meta: 10 abordagens/dia)",
-              "responsavel": "Consultores",
-              "status": "pendente"
-            },
-            {
-              "id": "2.2",
-              "texto": "Treinamento semanal: Módulo 3 - Prospecção Ativa (segunda manha)",
-              "responsavel": "Wagner",
-              "status": "pendente"
-            },
-            {
-              "id": "2.3",
-              "texto": "Cada consultor traz 1 candidato indicado ao treinamento",
-              "responsavel": "Consultores",
-              "status": "pendente"
-            },
-            {
-              "id": "2.4",
-              "texto": "Raphael realiza reuniões individuais com cada consultor (15-30min)",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "2.5",
-              "texto": "Meta: primeiros fechamentos - mínimo 2 contratos na semana",
-              "responsavel": "Consultores",
-              "status": "pendente"
-            },
-            {
-              "id": "2.6",
-              "texto": "Ativar canal de leads da Matriz Ademicon",
-              "responsavel": "Wagner",
-              "status": "pendente"
-            },
-            {
-              "id": "2.7",
-              "texto": "Meta VGV semanal: R$ 150.000",
-              "responsavel": "Time",
-              "status": "pendente"
-            }
+            {"id": "2.1", "texto": "Consultores iniciam prospecção ativa (meta: 10 abordagens/dia)", "responsavel": "Consultores", "status": "pendente"},
+            {"id": "2.2", "texto": "Treinamento semanal: Módulo 3 - Prospecção Ativa (segunda manha)", "responsavel": "Wagner", "status": "pendente"},
+            {"id": "2.3", "texto": "Cada consultor traz 1 candidato indicado ao treinamento", "responsavel": "Consultores", "status": "pendente"},
+            {"id": "2.4", "texto": "Raphael realiza reuniões individuais com cada consultor (15-30min)", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "2.5", "texto": "Meta: primeiros fechamentos - mínimo 2 contratos na semana", "responsavel": "Consultores", "status": "pendente"},
+            {"id": "2.6", "texto": "Ativar canal de leads da Matriz Ademicon", "responsavel": "Wagner", "status": "pendente"},
+            {"id": "2.7", "texto": "Meta VGV semanal: R$ 150.000", "responsavel": "Time", "status": "pendente"}
           ]
         },
         {
@@ -158,36 +68,11 @@
           "título": "Crescimento do Time e Aceleração",
           "status": "pendente",
           "ações": [
-            {
-              "id": "3.1",
-              "texto": "Contratar mais 2 a 3 consultores (total 6 a 7 ativos)",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "3.2",
-              "texto": "Treinamento semanal: Módulo 4 - Atendimento e Conversao (segunda manha)",
-              "responsavel": "Wagner",
-              "status": "pendente"
-            },
-            {
-              "id": "3.3",
-              "texto": "Ativar campanha outbound via Agente IA MXMR com lista de leads",
-              "responsavel": "Israel + Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "3.4",
-              "texto": "Refinar cadência de FUP no Apollo com base nos primeiros dados",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "3.5",
-              "texto": "Meta VGV semanal: R$ 150.000",
-              "responsavel": "Time",
-              "status": "pendente"
-            }
+            {"id": "3.1", "texto": "Contratar mais 2 a 3 consultores (total 6 a 7 ativos)", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "3.2", "texto": "Treinamento semanal: Módulo 4 - Atendimento e Conversao (segunda manha)", "responsavel": "Wagner", "status": "pendente"},
+            {"id": "3.3", "texto": "Ativar campanha outbound via Agente IA MXMR com lista de leads", "responsavel": "Israel + Raphael", "status": "pendente"},
+            {"id": "3.4", "texto": "Refinar cadência de FUP no Apollo com base nos primeiros dados", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "3.5", "texto": "Meta VGV semanal: R$ 150.000", "responsavel": "Time", "status": "pendente"}
           ]
         },
         {
@@ -195,42 +80,12 @@
           "título": "Fechamento do Primeiro Mes",
           "status": "pendente",
           "ações": [
-            {
-              "id": "4.1",
-              "texto": "Treinamento semanal: Módulo 5 - CRM e Pos-venda (segunda manha)",
-              "responsavel": "Wagner",
-              "status": "pendente"
-            },
-            {
-              "id": "4.2",
-              "texto": "Reunião mensal de realinhamento estratégico (4 líderes)",
-              "responsavel": "Israel",
-              "status": "pendente"
-            },
-            {
-              "id": "4.3",
-              "texto": "Identificar candidato a Líder da primeira célula",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "4.4",
-              "texto": "Avaliação de desempenho individual de cada consultor",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "4.5",
-              "texto": "Meta VGV mensal: R$ 600.000 (fechamento do mes 1)",
-              "responsavel": "Time",
-              "status": "pendente"
-            },
-            {
-              "id": "4.6",
-              "texto": "Cerimônia de reconhecimento: Consultor do Mes 1",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            }
+            {"id": "4.1", "texto": "Treinamento semanal: Módulo 5 - CRM e Pos-venda (segunda manha)", "responsavel": "Wagner", "status": "pendente"},
+            {"id": "4.2", "texto": "Reunião mensal de realinhamento estratégico (4 líderes)", "responsavel": "Israel", "status": "pendente"},
+            {"id": "4.3", "texto": "Identificar candidato a Líder da primeira célula", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "4.4", "texto": "Avaliação de desempenho individual de cada consultor", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "4.5", "texto": "Meta VGV mensal: R$ 600.000 (fechamento do mes 1)", "responsavel": "Time", "status": "pendente"},
+            {"id": "4.6", "texto": "Cerimônia de reconhecimento: Consultor do Mes 1", "responsavel": "Raphael", "status": "pendente"}
           ]
         }
       ]
@@ -244,30 +99,10 @@
           "título": "Aceleração e Preparacao do Líder",
           "status": "pendente",
           "ações": [
-            {
-              "id": "5.1",
-              "texto": "Início do mes 2: revisao de metas e estrutura do time",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "5.2",
-              "texto": "Candidato a Líder inicia preparacao formal com Raphael",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "5.3",
-              "texto": "Treinamento semanal: revisao de objeções e fechamento (segunda manha)",
-              "responsavel": "Wagner",
-              "status": "pendente"
-            },
-            {
-              "id": "5.4",
-              "texto": "Meta VGV semanal: R$ 375.000",
-              "responsavel": "Time",
-              "status": "pendente"
-            }
+            {"id": "5.1", "texto": "Início do mes 2: revisao de metas e estrutura do time", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "5.2", "texto": "Candidato a Líder inicia preparacao formal com Raphael", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "5.3", "texto": "Treinamento semanal: revisao de objeções e fechamento (segunda manha)", "responsavel": "Wagner", "status": "pendente"},
+            {"id": "5.4", "texto": "Meta VGV semanal: R$ 375.000", "responsavel": "Time", "status": "pendente"}
           ]
         },
         {
@@ -275,24 +110,9 @@
           "título": "Recrutamento para a Célula 1",
           "status": "pendente",
           "ações": [
-            {
-              "id": "6.1",
-              "texto": "Recrutamento intensivo para completar a Célula 1 (5 consultores + líder)",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "6.2",
-              "texto": "Treinamento semanal continuo (segunda manha)",
-              "responsavel": "Wagner",
-              "status": "pendente"
-            },
-            {
-              "id": "6.3",
-              "texto": "Meta VGV semanal: R$ 375.000",
-              "responsavel": "Time",
-              "status": "pendente"
-            }
+            {"id": "6.1", "texto": "Recrutamento intensivo para completar a Célula 1 (5 consultores + líder)", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "6.2", "texto": "Treinamento semanal continuo (segunda manha)", "responsavel": "Wagner", "status": "pendente"},
+            {"id": "6.3", "texto": "Meta VGV semanal: R$ 375.000", "responsavel": "Time", "status": "pendente"}
           ]
         },
         {
@@ -300,24 +120,9 @@
           "título": "Consolidação da Célula 1",
           "status": "pendente",
           "ações": [
-            {
-              "id": "7.1",
-              "texto": "Todos os consultores da Célula 1 onboardados e em operação",
-              "responsavel": "Wagner + Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "7.2",
-              "texto": "Raphael inicia reuniões semanais com Líder da Célula (30-60min)",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "7.3",
-              "texto": "Meta VGV semanal: R$ 375.000",
-              "responsavel": "Time",
-              "status": "pendente"
-            }
+            {"id": "7.1", "texto": "Todos os consultores da Célula 1 onboardados e em operação", "responsavel": "Wagner + Raphael", "status": "pendente"},
+            {"id": "7.2", "texto": "Raphael inicia reuniões semanais com Líder da Célula (30-60min)", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "7.3", "texto": "Meta VGV semanal: R$ 375.000", "responsavel": "Time", "status": "pendente"}
           ]
         },
         {
@@ -325,42 +130,12 @@
           "título": "PRIMEIRA CELULA COMPLETA",
           "status": "pendente",
           "ações": [
-            {
-              "id": "8.1",
-              "texto": "MARCO: Primeira Célula oficialmente formada e operando",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "8.2",
-              "texto": "Líder de Célula 1 designado oficialmente",
-              "responsavel": "Raphael + Israel",
-              "status": "pendente"
-            },
-            {
-              "id": "8.3",
-              "texto": "Reunião mensal de realinhamento: metas do mes 3 definidas",
-              "responsavel": "Israel",
-              "status": "pendente"
-            },
-            {
-              "id": "8.4",
-              "texto": "Desdobramento das diretrizes para o Líder da Célula 1",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "8.5",
-              "texto": "Meta VGV mensal: R$ 1.500.000 (fechamento do mes 2)",
-              "responsavel": "Time",
-              "status": "pendente"
-            },
-            {
-              "id": "8.6",
-              "texto": "Cerimônia de reconhecimento: Consultor do Mes 2 + reconhecimento do Líder",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            }
+            {"id": "8.1", "texto": "MARCO: Primeira Célula oficialmente formada e operando", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "8.2", "texto": "Líder de Célula 1 designado oficialmente", "responsavel": "Raphael + Israel", "status": "pendente"},
+            {"id": "8.3", "texto": "Reunião mensal de realinhamento: metas do mes 3 definidas", "responsavel": "Israel", "status": "pendente"},
+            {"id": "8.4", "texto": "Desdobramento das diretrizes para o Líder da Célula 1", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "8.5", "texto": "Meta VGV mensal: R$ 1.500.000 (fechamento do mes 2)", "responsavel": "Time", "status": "pendente"},
+            {"id": "8.6", "texto": "Cerimônia de reconhecimento: Consultor do Mes 2 + reconhecimento do Líder", "responsavel": "Raphael", "status": "pendente"}
           ]
         }
       ]
@@ -374,24 +149,9 @@
           "título": "Recrutamento da Célula 2",
           "status": "pendente",
           "ações": [
-            {
-              "id": "9.1",
-              "texto": "Início do recrutamento intensivo para a Célula 2",
-              "responsavel": "Raphael + Líder C1",
-              "status": "pendente"
-            },
-            {
-              "id": "9.2",
-              "texto": "Célula 1 em plena operação autonoma sob o Líder",
-              "responsavel": "Líder Célula 1",
-              "status": "pendente"
-            },
-            {
-              "id": "9.3",
-              "texto": "Meta VGV semanal: R$ 750.000",
-              "responsavel": "Time",
-              "status": "pendente"
-            }
+            {"id": "9.1", "texto": "Início do recrutamento intensivo para a Célula 2", "responsavel": "Raphael + Líder C1", "status": "pendente"},
+            {"id": "9.2", "texto": "Célula 1 em plena operação autonoma sob o Líder", "responsavel": "Líder Célula 1", "status": "pendente"},
+            {"id": "9.3", "texto": "Meta VGV semanal: R$ 750.000", "responsavel": "Time", "status": "pendente"}
           ]
         },
         {
@@ -399,24 +159,9 @@
           "título": "Formação da Célula 2",
           "status": "pendente",
           "ações": [
-            {
-              "id": "10.1",
-              "texto": "Onboarding dos consultores da Célula 2",
-              "responsavel": "Wagner + Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "10.2",
-              "texto": "Identificar candidato a Líder da Célula 2",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "10.3",
-              "texto": "Meta VGV semanal: R$ 750.000",
-              "responsavel": "Time",
-              "status": "pendente"
-            }
+            {"id": "10.1", "texto": "Onboarding dos consultores da Célula 2", "responsavel": "Wagner + Raphael", "status": "pendente"},
+            {"id": "10.2", "texto": "Identificar candidato a Líder da Célula 2", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "10.3", "texto": "Meta VGV semanal: R$ 750.000", "responsavel": "Time", "status": "pendente"}
           ]
         },
         {
@@ -424,18 +169,8 @@
           "título": "Aceleração Final",
           "status": "pendente",
           "ações": [
-            {
-              "id": "11.1",
-              "texto": "Célula 2 em operação plena",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "11.2",
-              "texto": "Meta VGV semanal: R$ 750.000+",
-              "responsavel": "Time",
-              "status": "pendente"
-            }
+            {"id": "11.1", "texto": "Célula 2 em operação plena", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "11.2", "texto": "Meta VGV semanal: R$ 750.000+", "responsavel": "Time", "status": "pendente"}
           ]
         },
         {
@@ -443,42 +178,12 @@
           "título": "SEGUNDA CELULA COMPLETA - Marco 90 Dias",
           "status": "pendente",
           "ações": [
-            {
-              "id": "12.1",
-              "texto": "MARCO: Segunda Célula oficialmente formada e operando",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "12.2",
-              "texto": "Raphael lídera 2 células com 2 líderes reportando a ele",
-              "responsavel": "Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "12.3",
-              "texto": "Avaliação completa dos 90 dias: resultados vs metas",
-              "responsavel": "Israel + Raphael",
-              "status": "pendente"
-            },
-            {
-              "id": "12.4",
-              "texto": "Planejamento do proximo ciclo (dias 91-180)",
-              "responsavel": "Israel",
-              "status": "pendente"
-            },
-            {
-              "id": "12.5",
-              "texto": "Meta VGV mensal: R$ 3.000.000+ (fechamento do mes 3)",
-              "responsavel": "Time",
-              "status": "pendente"
-            },
-            {
-              "id": "12.6",
-              "texto": "Cerimônia de reconhecimento especial dos 90 dias",
-              "responsavel": "Israel + Raphael",
-              "status": "pendente"
-            }
+            {"id": "12.1", "texto": "MARCO: Segunda Célula oficialmente formada e operando", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "12.2", "texto": "Raphael lídera 2 células com 2 líderes reportando a ele", "responsavel": "Raphael", "status": "pendente"},
+            {"id": "12.3", "texto": "Avaliação completa dos 90 dias: resultados vs metas", "responsavel": "Israel + Raphael", "status": "pendente"},
+            {"id": "12.4", "texto": "Planejamento do proximo ciclo (dias 91-180)", "responsavel": "Israel", "status": "pendente"},
+            {"id": "12.5", "texto": "Meta VGV mensal: R$ 3.000.000+ (fechamento do mes 3)", "responsavel": "Time", "status": "pendente"},
+            {"id": "12.6", "texto": "Cerimônia de reconhecimento especial dos 90 dias", "responsavel": "Israel + Raphael", "status": "pendente"}
           ]
         }
       ]
