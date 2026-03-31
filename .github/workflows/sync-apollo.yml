@@ -1,0 +1,33 @@
+name: Sync Apollo CRM Data
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch Apollo data
+        env:
+          APOLLO_API_KEY: ${{ secrets.APOLLO_API_KEY }}
+        run: python scripts/fetch_apollo.py
+
+      - name: Commit updated data
+        run: |
+          git config user.email "apollo-sync@ademicon.com"
+          git config user.name "Apollo Sync Bot"
+          git add data.json
+          git diff --staged --quiet || (git commit -m "chore: sync Apollo CRM data $(date -u '+%Y-%m-%d %H:%M UTC')" && git push)
