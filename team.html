@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ademicon Vila Olimpia | TV do Time</title>
+  <title>Ademicon Vila Olímpia | TV do Time</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
@@ -421,7 +421,7 @@
 <!-- TOP BAR -->
 <div class="top-bar">
   <div>
-    <div class="top-logo">ADEMICON | VILA OLIMPIA</div>
+    <div class="top-logo">ADEMICON | VILA OLÍMPIA</div>
     <div class="top-sub">Dashboard Operacional</div>
   </div>
   <div class="top-time-box">
@@ -474,7 +474,7 @@
 <div class="bottom-bar">
   <div class="ticker-label">AO VIVO</div>
   <div class="ticker-track">
-    <span class="ticker-content" id="ticker-content">Bem-vindos ao painel Ademicon Vila Olimpia! Vamos juntos bater as metas!</span>
+    <span class="ticker-content" id="ticker-content">Bem-vindos ao painel Ademicon Vila Olímpia! Vamos juntos bater as metas!</span>
   </div>
   <div class="motivacional-banner">
     <span id="motivacional-text">Carregando...</span>
@@ -505,13 +505,13 @@ updateClock();
 // FRASES MOTIVACIONAIS
 // ============================================================
 const frases = [
-  "Cada nao te aproxima do proximo sim. Continue prospectando!",
+  "Cada nao te apróxima do próximo sim. Continue prospectando!",
   "Campeoes nao sao feitos na condicao de conforto.",
   "Sua disciplina hoje e o seu resultado amanha.",
   "Um contrato fechado muda a vida de uma familia.",
   "Foco, persistencia e resultado. Esse e o nosso padrao.",
   "O sucesso nao e um acidente. E trabalho, perseveranca e aprendizado.",
-  "Ligue mais uma vez. Aquela ligacao pode ser o contrato do mes.",
+  "Ligue mais uma vez. Aquela ligacao pode ser o contrato do mês.",
   "Times vencedores nao esperam motivacao. Eles criam habitos.",
   "Cada abordagem e uma semente plantada. Agua com disciplina.",
   "Quem prospecta muito, fecha muito. Simples assim.",
@@ -538,10 +538,10 @@ function renderTV(data) {
   const metaSemanal = data.metas[metaKey]?.semanal || 150000;
   const metaMensal = data.metas[metaKey]?.mensal || 600000;
   const vgvSem = data.resultados.vgv_semana_atual || 0;
-  const vgvMes = data.resultados.vgv_mes_atual || 0;
+  const vgvMês = data.resultados.vgv_mes_atual || 0;
 
   const pSem = pct(vgvSem, metaSemanal);
-  const pMes = pct(vgvMes, metaMensal);
+  const pMês = pct(vgvMes, metaMensal);
 
   // Valores semana
   document.getElementById('tv-vgv-semana').textContent = fmt(vgvSem);
@@ -562,19 +562,19 @@ function renderTV(data) {
 
   const mesBar = document.getElementById('tv-mes-bar');
   mesBar.style.width = Math.max(pMes, 0.5) + '%';
-  if (pMes >= 80) mesBar.style.background = '#22c55e';
-  else if (pMes >= 50) mesBar.style.background = '#eab308';
+  if (pMês >= 80) mesBar.style.background = '#22c55e';
+  else if (pMês >= 50) mesBar.style.background = '#eab308';
   else mesBar.style.background = '#ef4444';
 
   // Falta para meta
   const falta = Math.max(0, metaSemanal - vgvSem);
   document.getElementById('falta-meta').textContent = fmt(falta);
 
-  // Dias restantes no mes
+  // Dias restantes no mês
   const hoje = new Date();
   const ultimoDia = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0);
   const diasRestantes = ultimoDia.getDate() - hoje.getDate();
-  document.getElementById('dias-restantes').textContent = diasRestantes + ' dias restantes no mes';
+  document.getElementById('dias-restantes').textContent = diasRestantes + ' dias restantes no mês';
 
   // Ranking
   const consultores = (data.consultores || [])
@@ -594,7 +594,7 @@ function renderTV(data) {
   } else {
     const medals = ['&#127881;', '&#129351;', '&#129352;'];
     const badgeClasses = ['badge-ouro', 'badge-prata', 'badge-bronze'];
-    const badgeLabels = ['Lider', 'Vice', 'Terceiro'];
+    const badgeLabels = ['Líder', 'Vice', 'Terceiro'];
 
     rankingEl.innerHTML = consultores.slice(0, 6).map((c, i) => {
       const pos = i + 1;
@@ -616,9 +616,9 @@ function renderTV(data) {
     }).join('');
   }
 
-  // Ticker ultima venda
+  // Ticker última venda
   const vendas = data.vendas_recentes || [];
-  let tickerText = 'Bem-vindos ao painel Ademicon Vila Olimpia! Vamos juntos bater as metas! | ';
+  let tickerText = 'Bem-vindos ao painel Ademicon Vila Olímpia! Vamos juntos bater as metas! | ';
   if (vendas.length > 0) {
     tickerText = vendas.map(v =>
       `ULTIMA VENDA: ${v.consultor || 'Consultor'} fechou ${v.produto || 'contrato'} de ${fmt(v.valor || 0)} as ${v.hora || '--:--'}`
