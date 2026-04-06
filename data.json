@@ -1,5 +1,5 @@
 {
-  "ultima_atualizacao": "2026-04-06T10:36:48",
+  "ultima_atualizacao": "2026-04-02T17:28:23",
   "operação": {
     "início": "2026-04-07",
     "mes_atual": 1,
@@ -32,15 +32,31 @@
         "semana": 14,
         "vgv": 0.0,
         "label": "S1"
-      },
-      {
-        "semana": 15,
-        "vgv": 0.0,
-        "label": "S2"
       }
     ]
   },
-  "consultores": [],
+  "consultores": [
+    {
+      "nome": "Raphael Ragno",
+      "leads_ativos": 0,
+      "contratos_mes": 0,
+      "vgv_mes": 0.0,
+      "vgv_imoveis": 0.0,
+      "vgv_veiculos": 0.0,
+      "vgv_servicos": 0.0,
+      "vgv_semana": 0.0
+    },
+    {
+      "nome": "Consultor Teste",
+      "leads_ativos": 0,
+      "contratos_mes": 0,
+      "vgv_mes": 0.0,
+      "vgv_imoveis": 0.0,
+      "vgv_veiculos": 0.0,
+      "vgv_servicos": 0.0,
+      "vgv_semana": 0.0
+    }
+  ],
   "vendas_recentes": [],
   "funil": {
     "prospeccao": 0,
