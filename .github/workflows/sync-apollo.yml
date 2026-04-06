@@ -1,4 +1,4 @@
-name: Sync Apollo CRM Data
+name: Sync AVAPRO CRM Data
 
 on:
   schedule:
@@ -18,16 +18,17 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests beautifulsoup4 lxml
 
-      - name: Fetch Apollo data
+      - name: Fetch AVAPRO data
         env:
-          APOLLO_API_KEY: ${{ secrets.APOLLO_API_KEY }}
-        run: python scripts/fetch_apollo.py
+          AVAPRO_USERNAME: ${{ secrets.AVAPRO_USERNAME }}
+          AVAPRO_PASSWORD: ${{ secrets.AVAPRO_PASSWORD }}
+        run: python scripts/fetch_avapro.py
 
       - name: Commit updated data
         run: |
-          git config user.email "apollo-sync@ademicon.com"
-          git config user.name "Apollo Sync Bot"
+          git config user.email "avapro-sync@ademicon.com"
+          git config user.name "AVAPRO Sync Bot"
           git add data.json
-          git diff --staged --quiet || (git commit -m "chore: sync Apollo CRM data $(date -u '+%Y-%m-%d %H:%M UTC')" && git push)
+          git diff --staged --quiet || (git commit -m "chore: sync AVAPRO CRM data $(date -u '+%Y-%m-%d %H:%M UTC')" && git push)
