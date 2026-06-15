@@ -1,5 +1,5 @@
 {
-  "ultima_atualizacao": "2026-06-14T22:57:42",
+  "ultima_atualizacao": "2026-06-15T00:05:17",
   "operação": {
     "início": "2026-04-07",
     "mes_atual": 1,
@@ -82,6 +82,11 @@
         "semana": 24,
         "vgv": 0.0,
         "label": "S11"
+      },
+      {
+        "semana": 25,
+        "vgv": 0.0,
+        "label": "S12"
       }
     ]
   },
