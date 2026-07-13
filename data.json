@@ -1,5 +1,5 @@
 {
-  "ultima_atualizacao": "2026-07-12T23:40:58",
+  "ultima_atualizacao": "2026-07-13T01:29:06",
   "operação": {
     "início": "2026-04-07",
     "mes_atual": 1,
@@ -28,11 +28,6 @@
     "leads_ativos": 0,
     "prospecoes_hoje": 0,
     "historico_semanal": [
-      {
-        "semana": 17,
-        "vgv": 0.0,
-        "label": "S4"
-      },
       {
         "semana": 18,
         "vgv": 0.0,
@@ -85,6 +80,11 @@
       },
       {
         "semana": 28,
+        "vgv": 0.0,
+        "label": "S13"
+      },
+      {
+        "semana": 29,
         "vgv": 0.0,
         "label": "S13"
       }
